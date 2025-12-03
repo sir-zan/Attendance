@@ -1,0 +1,69 @@
+:root{--bg:#0f172a;--card:#1e293b;--accent:#3b82f6;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--text:#e2e8f0;--text-muted:#94a3b8}
+*{box-sizing:border-box;font-family:'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif}
+body{background:var(--bg);padding:20px;margin:0;color:var(--text)}
+.container{max-width:1000px;margin:0 auto;background:var(--card);padding:30px;border-radius:15px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+h1{margin:0 0 8px;font-size:32px;background:linear-gradient(135deg, #3b82f6, #8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+h2{margin-top:24px;margin-bottom:14px;font-size:20px;color:var(--text)}
+h3{margin:0 0 8px;font-size:16px;color:var(--text-muted)}
+.row{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+label{display:block;color:var(--text-muted);margin-top:12px;font-weight:500}
+input[type=number]{padding:10px 12px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:var(--text);font-size:14px;transition:all 0.2s}
+input[type=number]:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,0.1)}
+.radios,.events,.mode{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.radios label, .events label{display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:500;color:var(--text);margin:0}
+input[type=radio], input[type=checkbox]{cursor:pointer;width:18px;height:18px;accent-color:var(--accent)}
+.actions{margin-top:20px;display:flex;gap:8px}
+button{padding:10px 20px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer;font-weight:600;font-size:14px;transition:all 0.2s}
+button:hover{background:#2563eb;transform:translateY(-2px);box-shadow:0 5px 15px rgba(59,130,246,0.3)}
+button:active{transform:translateY(0)}
+button#resetBtn{background:#64748b}
+button#resetBtn:hover{background:#475569}
+.note{font-size:13px;color:var(--text-muted);margin-top:8px;padding:10px;background:#1e293b;border-radius:6px;border-left:3px solid var(--accent)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:14px;margin-top:16px}
+.card{background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%);padding:18px;border-radius:10px;border:1px solid #334155;transition:all 0.3s}
+.card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(59,130,246,0.2)}
+.percent-card{background:linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);border:2px solid #60a5fa;box-shadow:0 10px 30px rgba(59,130,246,0.2)}
+.percent-card h3{color:#dbeafe}
+.percent-card strong{color:#dbeafe}
+
+/* Ensure the large percentage text is solid and readable on the gradient background */
+#percentDisplay{color:#ffffff !important; -webkit-text-fill-color: #ffffff !important; background:none !important; -webkit-background-clip: initial !important}
+.warning{color:#fef2f2;font-weight:600;margin-top:10px;padding:12px;background:linear-gradient(135deg, #dc2626 0%, #991b1b 100%);border-radius:8px;border:1px solid #fca5a5;text-align:center;display:block}
+.warning.hidden{display:none}
+.explain{margin-top:16px;color:var(--text);background:#1e293b;padding:14px;border-radius:8px;border:1px solid #334155;line-height:1.6}
+.explain strong{color:#60a5fa}
+
+/* Calculation box */
+.calc-box{background:#f9f9f9;color:#0f172a;padding:12px;border-radius:8px;margin-top:10px;font-size:13px;border:1px solid #ddd}
+.calc-box strong{color:#2563eb}
+.note-attendance{margin-top:10px;padding:10px;border-radius:8px;background:linear-gradient(90deg,#05204a, #0b2540);color:var(--text);border:1px solid rgba(59,130,246,0.12);font-size:13px}
+
+.hidden{display:none}
+@media (max-width:700px){.row{flex-direction:column}.cards{grid-template-columns:1fr}.container{padding:20px}}
+
+/* Calendar styles */
+.calendar-wrap{margin-top:24px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;background:#1e293b;padding:14px;border-radius:10px;border:1px solid #334155}
+.calendar .day{background:#0f172a;padding:10px;border-radius:8px;min-height:60px;display:flex;flex-direction:column;transition:all 0.2s}
+.calendar .day .date{font-weight:700;margin-bottom:4px;font-size:16px}
+.calendar .day .tag{font-size:10px;color:#cbd5e1;font-weight:600;text-transform:uppercase}
+.calendar .day.mandatory{background:linear-gradient(135deg, #f97316 0%, #c2410c 100%);border:1px solid #fb923c;color:#fff}
+.calendar .day.it{background:linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);border:1px solid #60a5fa;color:#dbeafe}
+.calendar .day.ptm{background:linear-gradient(135deg, #10b981 0%, #065f46 100%);border:1px solid #34d399;color:#ecfdf5}
+.calendar .day.past{background:#334155;border:1px solid #475569;color:#94a3b8}
+.calendar .day.sunday{background:#6b21a8;border:1px solid #a855f7;color:#e9d5ff}
+.calendar .day.school-closed{background:#7f1d1d;border:1px solid #f87171;color:#fee2e2}
+.calendar .day.preboard{background:#92400e;border:1px solid #fbbf24;color:#fef3c7}
+.calendar .day.planned{box-shadow:0 0 0 2px var(--accent), inset 0 0 0 2px var(--accent)}
+.calendar .day:not(.mandatory):not(.past):not(.sunday):not(.school-closed):not(.preboard):hover{cursor:pointer;transform:scale(1.05);box-shadow:0 5px 15px rgba(59,130,246,0.3)}
+.legend{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.legend-item{padding:6px 10px;border-radius:6px;font-size:12px;font-weight:600;border:1px solid #475569}
+.legend-item.mandatory{background:#f97316;border-color:#fb923c;color:#fff}
+.legend-item.it{background:#3b82f6;border-color:#60a5fa;color:#dbeafe}
+.legend-item.ptm{background:#10b981;border-color:#34d399;color:#ecfdf5}
+.legend-item.past{background:#334155;border-color:#475569;color:#94a3b8}
+.legend-item.sunday{background:#6b21a8;border-color:#a855f7;color:#e9d5ff}
+.legend-item.school-closed{background:#7f1d1d;border-color:#f87171;color:#fee2e2}
+.legend-item.preboard{background:#92400e;border-color:#fbbf24;color:#fef3c7}
+.legend-item.planned{background:#1e40af;border-color:#60a5fa;color:#dbeafe}
+

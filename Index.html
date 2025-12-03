@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Attendance Absence Calculator</title>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div class="container">
+		<h1>📚 Attendance Absence Calculator</h1>
+		<p style="color:var(--text-muted);margin:4px 0 20px;font-size:14px;">Plan your absences wisely • December 2024 • Know your limits</p>
+
+		<form id="calcForm">
+			<div style="background:#1e293b;padding:14px;border-radius:8px;border-left:4px solid var(--accent);margin-bottom:16px;">
+				<p style="margin:0;color:var(--text-muted);font-size:13px;"><strong>📋 How it works:</strong> Enter your current attendance % and select your stream. The calculator shows how many days you can safely miss while maintaining your target attendance %.</p>
+			</div>
+
+			<div class="row">
+				<div style="flex:1;">
+					<label>📅 Total working days till now</label>
+					<input type="number" id="totalDays" min="1" value="137" />
+				</div>
+			</div>
+
+			<div style="background:#1e293b;padding:12px;border-radius:8px;margin:12px 0;">
+				<label>Enter current attendance (pick one):</label>
+				<div class="row">
+					<input type="number" id="percent" min="0" max="100" step="0.1" placeholder="Attendance % (e.g. 82.5)" />
+					<span style="color:var(--text-muted);">OR</span>
+					<input type="number" id="attendedSessions" min="0" step="0.5" placeholder="Sessions attended (e.g. 105)" />
+				</div>
+			</div>
+
+			<div>
+				<label>🎓 Your Stream</label>
+				<div class="radios">
+					<label><input type="radio" name="type" value="it" checked /> IT (15-17 are mandatory)</label>
+					<label><input type="radio" name="type" value="other" /> Other Stream</label>
+				</div>
+			</div>
+
+			<div>
+				<label>🎉 Special Events Attendance</label>
+				<div class="events">
+					<label><input type="checkbox" id="attendSpecial" checked /> <strong>I'll attend 18, 19, 21</strong> (Career Counseling + CEO Summit + Annual Day) = <strong style="color:var(--success);">+2%</strong></label>
+				</div>
+			</div>
+
+			<div class="actions">
+				<button type="button" id="calcBtn">🔍 Calculate</button>
+				<button type="button" id="resetBtn">↻ Reset</button>
+			</div>
+
+			<script>
+			// auto-recalculate when simulated absence inputs change
+			(function(){
+				function onInputChange(e){
+					try{ document.getElementById('calcBtn').click(); } catch(e){}
+				}
+				window.addEventListener('DOMContentLoaded', ()=>{
+					const f = document.getElementById('absentFull');
+					const h = document.getElementById('absentHalf');
+					if(f) f.addEventListener('input', onInputChange);
+					if(h) h.addEventListener('input', onInputChange);
+				});
+			})();
+			</script>
+		</form>
+
+	<div class="calendar-wrap">
+		<h2>📆 December Calendar (click weekdays to toggle)</h2>
+		<div class="legend">
+			<span class="legend-item mandatory">🔴 Mandatory (18,19,21)</span>
+			<span class="legend-item it">🔵 IT Only (15-17)</span>
+			<span class="legend-item ptm">🟢 PTM (6)</span>
+			<span class="legend-item past">⚫ Passed (1-3)</span>
+			<span class="legend-item sunday">⚪ Sundays</span>
+			<span class="legend-item school-closed">🔐 Closed</span>
+			<span class="legend-item preboard">🟠 Pre-board</span>
+			<span class="legend-item planned">✅ Planned</span>
+		</div>
+		<div id="calendar" class="calendar" aria-label="December calendar"></div>
+	</div>
+
+		<section id="results" class="hidden">
+			<h2>📊 Results & Analysis</h2>
+			<div class="note">
+				<strong>Rules:</strong> Half-day (-0.5%) • Full-day (-0.8%) • Attend 18/19/21 (+2%)
+			</div>
+
+			<div class="cards">
+				<div class="card percent-card">
+					<h3>📈 Your Current Attendance</h3>
+					<div id="percentDisplay" style="font-size:32px;font-weight:bold;color:#ffffff;margin:12px 0">0%</div>
+					<div id="percentWarning" class="warning hidden">⚠️ Critical! Below 75% — must attend till end of month</div>
+					<div id="attendanceNote" class="note-attendance hidden"></div> 
+				</div>
+			</div>
+
+			<div style="background:#1e293b;padding:12px;border-radius:8px;margin:12px 0;">
+				<label>Simulate absences</label>
+				<div class="row">
+					<input type="number" id="absentFull" min="0" step="1" placeholder="Full days absent (×0.8%)" />
+					<input type="number" id="absentHalf" min="0" step="1" placeholder="Half days absent (×0.5%)" />
+				</div>
+				<div style="font-size:12px;color:var(--text-muted);margin-top:6px;">Enter how many full/half days you plan to miss; the calculator will show the resulting percentage.</div>
+			</div>
+
+			<div class="explain" id="explain"></div>
+		</section>
+	</div>
+
+	<script src="calc.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>
