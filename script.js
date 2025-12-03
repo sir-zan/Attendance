@@ -159,7 +159,6 @@ const plannedDays = new Set([4,5,6,8,9,10,11,12,13,15,16,17,18,19,20,21]);
 			note += `<strong>Simulated absences (affect projected only):</strong> -${simFull} full days (${(simFull * 0.8).toFixed(2)}%) -${simHalf} half days (${(simHalf * 0.5).toFixed(2)}%) = -${simDeduction.toFixed(2)}%<br>`;
 			note += `<strong>Projected after absences:</strong> ${projectedWithBonus.toFixed(2)}% - ${simDeduction.toFixed(2)}% = <strong>${projectedStr}%</strong><br>`;
 		}
-		note += `<strong>Allowed to miss (calculated from your input %):</strong><br>`;
 		if(margin85 >= 0) {
 			note += `&nbsp;&nbsp;For ≥85%: margin = ${currentPercentStr}% - 85% = ${margin85.toFixed(2)}% → ${Math.floor(margin85/fullDeduct)} full days allowed`;
 			if(r85FullAdj < Math.floor(margin85/fullDeduct)) note += ` (limited to ${r85FullAdj} due to only ${missablePool} non-mandatory days available)`;
@@ -171,7 +170,6 @@ const plannedDays = new Set([4,5,6,8,9,10,11,12,13,15,16,17,18,19,20,21]);
 		note += `<br>`;
 		if(isIT) note += `<strong>Note:</strong> As IT student, days 15-17 are mandatory (cannot be missed).<br>`;
 		if(!attendSpecialEffective && attendSpecial) note += `<strong>Note:</strong> You deselected one or more special days (18,19,21) — +2% bonus will not be applied.<br>`;
-		note += `<strong>Your attendance plan:</strong> attending ${plannedCount}/${N} available days in Dec, missing ${missedDays} day(s)<br>`;
 		note += `</div>`;
 		
 		// Add summary
