@@ -292,27 +292,6 @@ const plannedDays = new Set([4,5,6,8,9,10,11,12,13,15,16,17,18,19,20,21]);
 				day.classList.add('planned');
 			}
 
-			// Make day clickable only for non-mandatory, non-past, non-sunday, non-school-closed, non-preboard days
-			if(isClickable){
-				day.style.cursor = 'pointer';
-				day.addEventListener('click', ()=>{
-					// Only allow adding days, never removing them
-					if(!plannedDays.has(d)){
-						plannedDays.add(d);
-						day.classList.add('planned');
-						// Sync the special-events checkbox state: if any special day is deselected, uncheck the box; if all selected, check it
-						const specialCheckbox = el('attendSpecial');
-						if(specialCheckbox){
-							specialCheckbox.checked = mandatoryDates.every(x => plannedDays.has(x));
-						}
-						// Recalculate on toggle
-						calc();
-					}
-				});
-			} else {
-				day.style.cursor = (isMandatory || isITMandatory) ? 'default' : 'not-allowed';
-				if(!isMandatory && !isITMandatory) day.style.opacity = '0.5';
-			}
 
 			cal.appendChild(day);
 		}
